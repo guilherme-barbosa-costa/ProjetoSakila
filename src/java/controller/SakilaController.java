@@ -21,7 +21,7 @@ import model.dao.FilmesDAO;
  *
  * @author Senai
  */
-@WebServlet(name = "SakilaController", urlPatterns = {"/SakilaController", "/sakila","/cadastrar", "/editar"})
+@WebServlet(name = "SakilaController", urlPatterns = {"/SakilaController", "/sakila","/cadastrar", "/editar", "/excluir"})
 public class SakilaController extends HttpServlet {
 
     /**
@@ -68,8 +68,13 @@ public class SakilaController extends HttpServlet {
         request.setAttribute("descricao", filmeAtual.getDescricao());
         request.setAttribute("ano", filmeAtual.getAnofilme());
         
-        
         request.getRequestDispatcher("/WEB-INF/jsp/editar.jsp").forward(request, response);
+    }
+    else if(paginaAtual.equals("/excluir")){
+        int id = Integer.parseInt(request.getParameter("filme"));
+        fdao.excluirFilme(id);
+        
+        response.sendRedirect("./sakila");
     }
     } 
 
