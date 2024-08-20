@@ -75,4 +75,33 @@ try{
 e.printStackTrace();
 }
     }
+    
+    public Filmes selecionarFilme(int id){
+        Filmes filmeSelecionado = new Filmes();
+        try{
+            Connection conexao = Conexao.conectar();
+            PreparedStatement stmt = null;
+            ResultSet rs = null;
+            
+            stmt = conexao.prepareStatement("SELECT * FROM film WHERE film_id = ?");
+            stmt.setInt(1, id);
+            
+            
+            rs = stmt.executeQuery();
+            if(rs.next()){
+                filmeSelecionado.setTitle(rs.getString("title"));
+                filmeSelecionado.setTitle(rs.getString("description"));
+                filmeSelecionado.setTitle(rs.getString("release_year"));
+            }
+            
+            rs.close();
+            stmt.close();
+            conexao.close();
+            
+            
+        }catch(SQLException e){
+           e.printStackTrace();
+           }     
+        return filmeSelecionado;
+    }
 }

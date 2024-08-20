@@ -21,7 +21,7 @@ import model.dao.FilmesDAO;
  *
  * @author Senai
  */
-@WebServlet(name = "SakilaController", urlPatterns = {"/SakilaController", "/sakila","/cadastrar"})
+@WebServlet(name = "SakilaController", urlPatterns = {"/SakilaController", "/sakila","/cadastrar", "/editar"})
 public class SakilaController extends HttpServlet {
 
     /**
@@ -51,15 +51,26 @@ public class SakilaController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
             String paginaAtual = request.getServletPath();
-            if(paginaAtual.equals("/sakila")){
-                FilmesDAO fdao = new FilmesDAO();
+            FilmesDAO fdao = new FilmesDAO();
                 List<Filmes> filmes = fdao.ler();
-                
+            if(paginaAtual.equals("/sakila")){
+     
+                filmes = fdao.ler();
                 request.setAttribute("filmes", filmes);
                 request.getRequestDispatcher("/WEB-INF/jsp/sakila.jsp").forward(request, response);
     }else if(paginaAtual.equals("/cadastrar")){
                 request.getRequestDispatcher("/WEB-INF/jsp/cadastrar.jsp").forward(request, response);
             }
+    else if(paginaAtual.equals("/editar")){
+        int id = Integer.parseInt(request.getParameter("filme"));
+        Filmes filmeAtual = fdao.selecionarFilme(id);
+        request.setAttribute("titulo", filmeAtual.getTitle());
+        request.setAttribute("descricao", filmeAtual.getDescricao());
+        request.setAttribute("ano", filmeAtual.getAnofilme());
+        
+        
+        request.getRequestDispatcher("/WEB-INF/jsp/editar.jsp").forward(request, response);
+    }
     } 
 
     /**
