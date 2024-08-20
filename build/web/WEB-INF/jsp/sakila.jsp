@@ -11,7 +11,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-        <title>JSP Page</title>
+        <title>Página Inicial</title>
         <style>
              
             
@@ -58,8 +58,8 @@
                 <td>
                     <a class="btnedit" href="./editar?filme=${filme.filme_id}"> 
                         <button type="button" class="btn btn-warning">Editar</button></a>
-                    <a class="btnedit" href="./editar?filme=${filme.filme_id}"> 
-                    <button type="button" class="btn btn-danger">Excluir</button>
+                    <a class="btnedit" href="./excluir?filme=${filme.filme_id}"> 
+                        <button type="button" class="btn btn-danger">Excluir</button>
                     </a>
                 </td>
                 </tr>

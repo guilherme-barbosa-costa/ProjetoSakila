@@ -104,4 +104,29 @@ e.printStackTrace();
            }     
         return filmeSelecionado;
     }
+    
+    public void excluirFilme(int id){
+            
+try{
+   Connection conexao = Conexao.conectar();
+   PreparedStatement stmt = null;
+   
+   stmt = conexao.prepareStatement(
+   "DELETE FROM film WHERE film_id = ?"
+   );
+   
+   
+   stmt.setInt(1, id);
+   
+   
+
+   stmt.executeUpdate();
+   stmt.close();
+   conexao.close();
+
+}catch(SQLException e){
+e.printStackTrace();
+}
+    }
+    
 }
