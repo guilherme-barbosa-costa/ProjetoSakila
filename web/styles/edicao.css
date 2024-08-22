@@ -1,0 +1,44 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 22/08/2024, 16:23:51
+    Author     : Senai
+*/
+
+    td {
+        align: center;
+        border: 1px solid white; /* Altere #000 para a cor desejada */
+}
+            .inpcad {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: white;
+            background-color: #007BFF;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+            border: 1px solid #007BFF;
+            }
+        
+        .bodysakila{
+            background-color: white;
+        }
+        
+        
+        
+        table{
+            margin: auto;
+            background-color: black;
+            color: white;
+        }
+        
+        h1{
+            text-align: center;
+        }
+ 
+
+
