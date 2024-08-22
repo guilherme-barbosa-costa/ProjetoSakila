@@ -90,8 +90,8 @@ e.printStackTrace();
             rs = stmt.executeQuery();
             if(rs.next()){
                 filmeSelecionado.setTitle(rs.getString("title"));
-                filmeSelecionado.setTitle(rs.getString("description"));
-                filmeSelecionado.setTitle(rs.getString("release_year"));
+                filmeSelecionado.setDescricao(rs.getString("description"));
+                filmeSelecionado.setAnofilme(rs.getInt("release_year"));
             }
             
             rs.close();
@@ -129,4 +129,32 @@ e.printStackTrace();
 }
     }
     
+    public void editarFilme(Filmes filme, int id){
+            
+try{
+   Connection conexao = Conexao.conectar();
+   PreparedStatement stmt = null;
+   
+   
+   stmt = conexao.prepareStatement(
+           "UPDATE film SET title = ?, description = ?, release_year = ?  WHERE film_id = ?"
+   );
+  
+   
+   
+   stmt.setString(1, filme.getTitle());
+   stmt.setString(2,filme.getDescricao());
+   stmt.setInt(3, filme.getAnofilme());
+   stmt.setInt(4, id);
+   
+   
+
+   stmt.executeUpdate();
+   stmt.close();
+   conexao.close();
+
+}catch(SQLException e){
+e.printStackTrace();
+}
+    }
 }

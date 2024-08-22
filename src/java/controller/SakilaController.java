@@ -64,8 +64,9 @@ public class SakilaController extends HttpServlet {
     else if(paginaAtual.equals("/editar")){
         int id = Integer.parseInt(request.getParameter("filme"));
         Filmes filmeAtual = fdao.selecionarFilme(id);
+        request.setAttribute("filme", id);
         request.setAttribute("titulo", filmeAtual.getTitle());
-        request.setAttribute("descricao", filmeAtual.getDescricao());
+        request.setAttribute("desc", filmeAtual.getDescricao());
         request.setAttribute("ano", filmeAtual.getAnofilme());
         
         request.getRequestDispatcher("/WEB-INF/jsp/editar.jsp").forward(request, response);
@@ -90,18 +91,33 @@ public class SakilaController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String paginaAtual = request.getServletPath();
+        Filmes novoFilme = new Filmes();
+        FilmesDAO filmes = new FilmesDAO();
         
         if(paginaAtual.equals("/cadastrar")) {
-            Filmes novoFilme = new Filmes();
             
             novoFilme.setTitle(request.getParameter("titulo"));
             novoFilme.setDescricao(request.getParameter("desc"));
             novoFilme.setAnofilme(Integer.parseInt(request.getParameter("ano")));
             
-            FilmesDAO filmes = new FilmesDAO();
+            
             filmes.cadastrar(novoFilme);
             
             response.sendRedirect("sakila");
+        }
+        
+        else if(paginaAtual.equals("/editar")){
+          int id = Integer.parseInt(request.getParameter("filme"));
+          
+          
+          novoFilme.setTitle(request.getParameter("titulo"));
+          novoFilme.setDescricao(request.getParameter("desc"));
+          novoFilme.setAnofilme(Integer.parseInt(request.getParameter("ano")));
+          filmes.editarFilme(novoFilme, id);
+          
+          response.sendRedirect("sakila");
+            
+            
         }
     }
 
